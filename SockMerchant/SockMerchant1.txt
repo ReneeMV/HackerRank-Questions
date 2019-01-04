@@ -11,17 +11,37 @@ def sockMerchant(n, ar):
     Determine how many pairs of socks with
     matching colors there are
     """
-    checked = set()
+    #dictionary (key, value pairs)
+    checked = {}
     pairs = 0
+
+    #go through length of the array
     for idx in range(len(ar)):
-        sock = ar[idx]
-        for ind in range(idx,len(ar)-1):
-            if sock not in checked:
-                checked.add(sock)
-            if ar[ind+1] == sock:
-                pairs += 1
-                break
-            #break
+        #see if nums in array have been checked yet
+        #utilizing unique keys
+        if ar[idx] not in checked:
+            #sock = key in dictionary
+            sock = ar[idx]
+            #assign value
+            checked[sock] = [ar[idx]]
+        else:
+            #if number has already been seen
+            checked[ar[idx]].append(ar[idx])
+            #add said number to corresponding key
+
+    #go through values in dictionary, check if even / odd
+    for num in checked.values():
+        #if the length of the values is even
+        if len(num) % 2 == 0:
+            #divide num / 2 bc that's the number of pairs
+            pairs += len(num) // 2
+        #if the length of the values is odd
+        else:
+            #subt so division would rounds down
+            newLen = len(num) -1
+            #(finding pairs of odd numbers)
+            pairs += newLen // 2
+
     return pairs
 
 def main():
