@@ -3,7 +3,9 @@ File: CountingValleys.py
 Assignment: HackerRank1:
 Language: python3.7
 Author: Renee Veit <rmv4506@rit.edu>
-Purpose:
+Purpose: Read in a string of each step taken (either
+up or down the terrain) and calculate how many valleys
+were covered.
 """
 
 def countingValleys(n,s):
@@ -15,22 +17,17 @@ def countingValleys(n,s):
    sea level, and then returning up to sea level). 
    """
    #count for above / below sea level
-   total = 0
+   sea_level = 0
    valleys = 0
 
    #go through each step taken
-   for step in range(0,n):
+   for step in s:
       if s[step] == "U":
-         total += 1
-      elif s[step] == "D":
-         total -= 1
-      if s[step +1] == "U":
-         while total <= 0 or step <= 1:
-            if s[step] == "U":
-               total += 1
-            else:
-               total -= 1
-         valleys += 1
+         sea_level += 1
+      else:
+         sea_level -= 1
+         if sea_level == 0:
+            valleys += 1
 
    return valleys
 
