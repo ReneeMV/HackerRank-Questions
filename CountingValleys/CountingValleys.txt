@@ -11,23 +11,36 @@ were covered.
 def countingValleys(n,s):
 
    """
-   Given a string containing down "D" and up "U",
-   calculate how many valleys exist (a valley is 
-   defined as starting at sea level, going down below
-   sea level, and then returning up to sea level). 
+   Given a string containing down "D" and up "U" 
+   characters, calculate how many valleys exist 
+  (a valley is defined as starting at sea level, 
+   going down below sea level, and then returning 
+   up to sea level). 
    """
+
    #count for above / below sea level
    sea_level = 0
    valleys = 0
 
    #go through each step taken
+
    for step in s:
+      #up = stepping above sea level
       if s[step] == "U":
          sea_level += 1
-      else:
-         sea_level -= 1
+
+         """
+         In order to check for valleys, the sea level 
+         has to inc from negative to zero
+         """
+
          if sea_level == 0:
             valleys += 1
+
+      else:
+         #down = stepping below sea level
+         sea_level -= 1
+         
 
    return valleys
 
