@@ -1,0 +1,48 @@
+"""
+File: CountingValleys.py
+Assignment: HackerRank1:
+Language: python3.7
+Author: Renee Veit <rmv4506@rit.edu>
+Purpose:
+"""
+
+def countingValleys(n,s):
+
+   """
+   Given a string containing down "D" and up "U",
+   calculate how many valleys exist (a valley is 
+   defined as starting at sea level, going down below
+   sea level, and then returning up to sea level). 
+   """
+   #count for above / below sea level
+   total = 0
+   valleys = 0
+
+   #go through each step taken
+   for step in range(0,n):
+      if s[step] == "U":
+         total += 1
+      elif s[step] == "D":
+         total -= 1
+      if s[step +1] == "U":
+         while total <= 0 or step <= 1:
+            if s[step] == "U":
+               total += 1
+            else:
+               total -= 1
+         valleys += 1
+
+   return valleys
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    n = int(input())
+
+    s = input()
+
+    result = countingValleys(n, s)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
